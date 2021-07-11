@@ -5,9 +5,9 @@ package TDAs;
  * @author gabri
  */
 public interface list<E> {
-    public boolean addFirst(E e); 
+    public void addFirst(E e); 
 
-    public boolean addLast(E e); 
+    public void addLast(E e); 
 
     public E removeFirst(); 
 
@@ -19,7 +19,7 @@ public interface list<E> {
 
     public void clear();
     
-    public void add(int index, E element); 
+    public boolean add(int index, E element); 
 
     public E remove(int index); 
 
