@@ -58,7 +58,7 @@ public class CircularLinkedList<Integer> implements list<Integer> {
         if (isEmpty()) {
             return null;
         }
-        E primero = tail.getNext().getContent();
+        E primero = tail.getNext().getContent();// corregir
         tail.setNext(tail.getNext().getNext());
         tail.getNext().getNext().setPrev(tail);
         size--;
@@ -97,7 +97,7 @@ public class CircularLinkedList<Integer> implements list<Integer> {
     public boolean isEmpty() {
         return size == 0;
     }
-
+//falta el clear
     @Override
     public void clear() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -132,9 +132,31 @@ public class CircularLinkedList<Integer> implements list<Integer> {
 
     @Override
     public Integer remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            return null;
+        }
+        if (index > size || index < 0) {
+            return null;
+        }
+        if (index == size - 1) {
+            return removeLast();
+        }
+        if (index == 0) {
+            return removeFirst();
+        }
+        int pos = 0;
+        for (CircularNode<Integer> e = tail.getNext(); e.getNext() != tail; e = e.getNext()) {
+            if (pos == index) {
+                e.getPrev().setNext(e.getNext());
+                e.getNext().setPrev(e.getPrev());
+                size--;
+                return e.getContent();
+            }
+            pos++;
+        }
+        return null;
     }
-
+// faltan estos dos
     @Override
     public Integer get(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
