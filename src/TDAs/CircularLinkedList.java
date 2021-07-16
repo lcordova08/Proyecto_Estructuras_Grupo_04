@@ -7,22 +7,21 @@ package TDAs;
  * @author gabri
  */
  
-public class CircularLinkedList<Integer> implements list<Integer> {
+public class CircularLinkedList<E> implements list<E> {
     
-    private CircularNode last;
-    
+    private CircularNode<E> tail = null;
+    private int size = 0;
     //Constructores
 
     public CircularLinkedList() {
         
     }
     
-    private CircularNode<Integer> tail = null;
-    private int size = 0;
+    
     
     @Override
-    public void addFirst(Integer e) {
-        CircularNode<Integer> nuevo = new CircularNode(e);
+    public void addFirst(E e) {
+        CircularNode<E> nuevo = new CircularNode(e);
         if (isEmpty()) {
             tail = nuevo;
             tail.setNext(nuevo);
@@ -37,8 +36,8 @@ public class CircularLinkedList<Integer> implements list<Integer> {
     }
 
     @Override
-    public void addLast(Integer e) {
-        CircularNode<Integer> nuevo = new CircularNode(e);
+    public void addLast(E e) {
+        CircularNode<E> nuevo = new CircularNode(e);
         if (isEmpty()) {
             nuevo.setNext(nuevo);
             nuevo.setPrev(nuevo);
@@ -54,11 +53,11 @@ public class CircularLinkedList<Integer> implements list<Integer> {
     }
 
     @Override
-    public Integer removeFirst() {
+    public E removeFirst() {
         if (isEmpty()) {
             return null;
         }
-        E primero = tail.getNext().getContent();// corregir
+        E primero = (E) tail.getNext().getContent();
         tail.setNext(tail.getNext().getNext());
         tail.getNext().getNext().setPrev(tail);
         size--;
@@ -69,18 +68,18 @@ public class CircularLinkedList<Integer> implements list<Integer> {
     }
 
     @Override
-    public Integer removeLast() {
+    public E removeLast() {
         if (isEmpty()) {
             return null;
         }
         if (size == 1) {
-            Integer temp = tail.getContent();
+            E temp = tail.getContent();
             tail = null;
             size--;
             return temp;
         }
-        CircularNode<Integer> newtail = tail.getPrev();
-        Integer temp = tail.getContent();
+        CircularNode<E> newtail = tail.getPrev();
+        E temp = tail.getContent();
         newtail.setNext(tail.getNext());
         tail.getNext().setPrev(newtail);
         tail = newtail;
@@ -100,11 +99,11 @@ public class CircularLinkedList<Integer> implements list<Integer> {
 //falta el clear
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.tail = null;
     }
 
     @Override
-    public boolean add(int index, Integer element) {
+    public boolean add(int index, E element) {
         if (index == 0) {
             addFirst(element);
         } else if (index > size || index < 0) {
@@ -131,7 +130,7 @@ public class CircularLinkedList<Integer> implements list<Integer> {
     }
 
     @Override
-    public Integer remove(int index) {
+    public E remove(int index) {
         if (isEmpty()) {
             return null;
         }
@@ -145,7 +144,7 @@ public class CircularLinkedList<Integer> implements list<Integer> {
             return removeFirst();
         }
         int pos = 0;
-        for (CircularNode<Integer> e = tail.getNext(); e.getNext() != tail; e = e.getNext()) {
+        for (CircularNode<E> e = tail.getNext(); e.getNext() != tail; e = e.getNext()) {
             if (pos == index) {
                 e.getPrev().setNext(e.getNext());
                 e.getNext().setPrev(e.getPrev());
@@ -158,12 +157,12 @@ public class CircularLinkedList<Integer> implements list<Integer> {
     }
 // faltan estos dos
     @Override
-    public Integer get(int index) {
+    public E get(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Integer set(int index, Integer element) {
+    public E set(int index, E element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

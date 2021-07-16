@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ruletaspractica;
+package modelo;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,7 +17,10 @@ import javafx.stage.Stage;
  *
  * @author gabri
  */
-public class RuletasPractica extends Application {
+public class View extends Application {
+    private static int width = 300;
+    private static int heigth = 250;
+    
     
     @Override
     public void start(Stage primaryStage) {
@@ -34,7 +37,7 @@ public class RuletasPractica extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, width, heigth);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
