@@ -5,17 +5,29 @@
  */
 package modelo;
 
+import javafx.scene.layout.StackPane;
+
 /**
  *
  * @author gabri
  */
 public class Game {
     private int apuesta;
-    private int numCirculos;
     private int numElementos;
+    private StackPane circulos;
+    private Circulo c1;
+    private Circulo c2;
     
     public Game(){
         
+    }
+    
+    public StackPane createCircles(int numElementos) {
+        StackPane rut = new StackPane();
+        
+        
+        
+        return rut;
     }
 
     public int getApuesta() {
@@ -25,14 +37,5 @@ public class Game {
     public void setApuesta(int apuesta) {
         this.apuesta = apuesta;
     }
-
-    public int getCirculos() {
-        return numCirculos;
-    }
-
-    public void setCirculos(int numCirculos) {
-        this.numCirculos = numCirculos;
-    }
-    
-    
+        
 }
