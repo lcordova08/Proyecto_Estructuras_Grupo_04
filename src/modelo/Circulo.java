@@ -7,8 +7,13 @@ package modelo;
 
 import TDAs.CircularDoublyLinkedList;
 import java.util.Random;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -19,23 +24,23 @@ import javafx.scene.shape.Circle;
 public class Circulo {
     private CircularDoublyLinkedList<Integer> elementos;
     private Pane view;
-    private final int radio;
-    private final int centroW;
-    private final int centroH;
+    private static int radio;
+    private static int centroX;
+    private static int centroY;
 
 
-    public Circulo(int radio, int centroW, int centroH, int cantidadElem) {
-        this.view = new Pane(createCircle(radio, centroW, centroH));
+    public Circulo(int radio, int centroX, int centroY, int cantidadElem) {
+        this.view = new Pane(createCircle(radio, centroX, centroY));
         this.radio = radio;
-        this.centroH = centroH;
-        this.centroW = centroW;
+        this.centroX = centroX;
+        this.centroY = centroY;
         this.elementos = generateValues(cantidadElem);
-        this.view.getChildren().add(addElemsView(cantidadElem, elementos));
+        addElemsView(cantidadElem, elementos);
 
     }
     
-    public Circle createCircle(int radio, int centroW, int centroH){
-        Circle c1 = new Circle(centroW, centroH, radio);
+    public Circle createCircle(int radio, int centroX, int centroY){
+        Circle c1 = new Circle(centroX, centroY, radio);
         c1.setStroke(Color.web("blue", 0.5));
         c1.setFill(Color.rgb(0, 0, 0, 0));
         return c1;
@@ -53,20 +58,18 @@ public class Circulo {
         return elem;
     }
     
-    public Pane addElemsView(int cantidadElem, CircularDoublyLinkedList<Integer> elementos){
-        Pane pane = new Pane();
+    public void addElemsView(int cantidadElem, CircularDoublyLinkedList<Integer> elementos){
+        Group tmp = new Group();
+        CircularPane pane = new CircularPane();
         for(int i = 0; i < cantidadElem; i++) {
-            double angulo = 2 * i * Math.PI / cantidadElem;
-            double xDist = radio * Math.cos(angulo);
-            double yDist = radio * Math.sin(angulo);
-            double x = centroW + xDist;
-            double y = centroH + yDist;
             String elem = Integer.toString(elementos.get(i));
             Button xd = new Button(elem);
             pane.getChildren().add(xd);
-            
         }
-        return pane;
+        tmp.getChildren().addAll(pane);
+        view.getChildren().add(tmp);
+        
+        
     }
 
     public CircularDoublyLinkedList<Integer> getElementos() {
