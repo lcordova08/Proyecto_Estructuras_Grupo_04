@@ -18,9 +18,11 @@ import javafx.stage.Stage;
  * @author gabri
  */
 public class View extends Application {
-    private static int width = 300;
-    private static int heigth = 250;
-    
+    private static int width = 1000;
+    private static int heigth = 1000;
+    private static int centroW = width / 2;
+    private static int centroH = heigth / 2;
+    private static int radio = 200;
     
     @Override
     public void start(Stage primaryStage) {
@@ -34,8 +36,11 @@ public class View extends Application {
             }
         });
         
+        Game game = new Game(radio,centroW, centroH, 5);
+        
+        
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        root.getChildren().add(game.getRoot());
         
         Scene scene = new Scene(root, width, heigth);
         

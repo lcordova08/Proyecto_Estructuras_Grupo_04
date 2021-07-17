@@ -8,11 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="RuletasPractica.jar" size="2314" download="eager" />
+    <jar href="RuletasPractica.jar" size="9106" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="RuletasPractica" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="ruletaspractica.RuletasPractica"  name="RuletasPractica" />
+  <jfx:javafx-desc  width="800" height="600" main-class="modelo.View"  name="RuletasPractica" />
   <update check="always"/>
 </jnlp>

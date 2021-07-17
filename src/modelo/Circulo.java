@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import TDAs.CircularLinkedList;
+import TDAs.CircularDoublyLinkedList;
 import java.util.Random;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -17,7 +17,7 @@ import javafx.scene.shape.Circle;
  * @author gabri
  */
 public class Circulo {
-    private CircularLinkedList<Integer> elementos;
+    private CircularDoublyLinkedList<Integer> elementos;
     private Pane view;
     private final int radio;
     private final int centroW;
@@ -30,27 +30,30 @@ public class Circulo {
         this.centroH = centroH;
         this.centroW = centroW;
         this.elementos = generateValues(cantidadElem);
-        this.view.getChildren().add(addElemsView(cantidadElem, generateValues(cantidadElem)));
+        this.view.getChildren().add(addElemsView(cantidadElem, elementos));
 
     }
     
     public Circle createCircle(int radio, int centroW, int centroH){
-        Circle c1 = new Circle(radio, centroW, centroH);
+        Circle c1 = new Circle(centroW, centroH, radio);
         c1.setStroke(Color.web("blue", 0.5));
+        c1.setFill(Color.rgb(0, 0, 0, 0));
         return c1;
         
     }
     
-    public CircularLinkedList<Integer> generateValues(int cantidadElem) {
+    public CircularDoublyLinkedList<Integer> generateValues(int cantidadElem) {
         Random rand = new Random();
-        CircularLinkedList<Integer> elem = new CircularLinkedList<>();
+        CircularDoublyLinkedList<Integer> elem = new CircularDoublyLinkedList<>();
         for(int i = 0; i < cantidadElem; i++) {
-            elem.addLast(rand.nextInt(10));
+            int num = rand.nextInt(10);
+            elem.addLast(num);
         }
+        elem.toString();
         return elem;
     }
     
-    public Pane addElemsView(int cantidadElem, CircularLinkedList<Integer> elementos){
+    public Pane addElemsView(int cantidadElem, CircularDoublyLinkedList<Integer> elementos){
         Pane pane = new Pane();
         for(int i = 0; i < cantidadElem; i++) {
             double angulo = 2 * i * Math.PI / cantidadElem;
@@ -58,17 +61,19 @@ public class Circulo {
             double yDist = radio * Math.sin(angulo);
             double x = centroW + xDist;
             double y = centroH + yDist;
-            Button xd = new Button(Integer.toString(elementos.get(i)));
+            String elem = Integer.toString(elementos.get(i));
+            Button xd = new Button(elem);
             pane.getChildren().add(xd);
+            
         }
         return pane;
     }
 
-    public CircularLinkedList<Integer> getElementos() {
+    public CircularDoublyLinkedList<Integer> getElementos() {
         return elementos;
     }
 
-    public void setElementos(CircularLinkedList<Integer> elementos) {
+    public void setElementos(CircularDoublyLinkedList<Integer> elementos) {
         this.elementos = elementos;
     }
 
