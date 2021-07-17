@@ -12,6 +12,7 @@ package modelo;
 public class Game {
     private int apuesta;
     private int numCirculos;
+    private int numElementos;
     
     public Game(){
         
