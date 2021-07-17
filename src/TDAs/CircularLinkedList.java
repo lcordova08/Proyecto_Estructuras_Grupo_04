@@ -158,13 +158,32 @@ public class CircularLinkedList<E> implements list<E> {
 // faltan estos dos
     @Override
     public E get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) return null;
+        if (index > size || index > 0) return null;
+        int pos = 0;
+        for (CircularNode<E> e = tail.getNext(); e.getNext() != tail; e = e.getNext()) {
+            if (pos == index) {
+                return e.getContent();
+            }
+            pos++;
+        }
+        return null;
     }
 
     @Override
     public E set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+if (isEmpty()) return null;
+        if (index > size || index > 0) return null;
+        int pos = 0;
+        for (CircularNode<E> e = tail.getNext(); e.getNext() != tail; e = e.getNext()) {
+            if (pos == index) {
+                E tmp = e.getContent();
+                e.setContent(element);
+                return tmp;
+            }
+            pos++;
+        }
+        return null;    }
 
 
 
