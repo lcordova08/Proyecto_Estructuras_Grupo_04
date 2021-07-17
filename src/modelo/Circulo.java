@@ -59,16 +59,30 @@ public class Circulo {
     }
     
     public void addElemsView(int cantidadElem, CircularDoublyLinkedList<Integer> elementos){
-        Group tmp = new Group();
-        CircularPane pane = new CircularPane();
-        for(int i = 0; i < cantidadElem; i++) {
-            String elem = Integer.toString(elementos.get(i));
-            Button xd = new Button(elem);
-            pane.getChildren().add(xd);
+        for(int i = 0; i < cantidadElem; i++){
+            double angulo = 2 * i * Math.PI / cantidadElem;
+            double xOffset = radio * Math.cos(angulo);
+            double yOffset = radio * Math.sin(angulo);
+            double x = centroX + xOffset;
+            double y = centroY + yOffset;
+            String value = Integer.toString(elementos.get(i));
+            Button label = new Button(value);
+            label.setLayoutX(x);
+            label.setLayoutY(y);
+            view.getChildren().add(label);
         }
-        tmp.getChildren().addAll(pane);
-        view.getChildren().add(tmp);
         
+    }
+    
+    public void rotateLeft() {
+        
+    }
+    
+    public void rotateRight() {
+        
+    }
+    
+    public void deleteRow(Circulo xd){
         
     }
 
