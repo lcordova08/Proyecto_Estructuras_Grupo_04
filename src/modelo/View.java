@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author gabri
+ * @author grupo_4
  */
 public class View extends Application {
     private static int width = 1000;

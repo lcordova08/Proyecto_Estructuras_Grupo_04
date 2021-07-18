@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 
 /**
  *
- * @author gabri
+ * @author grupo_4
  */
 public class Game {
     private int apuesta;

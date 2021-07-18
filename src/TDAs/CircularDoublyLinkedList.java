@@ -7,7 +7,7 @@ package TDAs;
 
 /**
  *
- * @author gabri
+ * @author grupo_4
  */
 
     public class CircularDoublyLinkedList<E> implements List<E> {

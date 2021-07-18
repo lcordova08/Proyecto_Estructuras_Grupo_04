@@ -2,7 +2,7 @@ package TDAs;
 
 /**
  *
- * @author gabri
+ * @author grupo_4
  */
     public interface List<E> {
     boolean addFirst(E element);

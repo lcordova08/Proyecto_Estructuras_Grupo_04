@@ -19,7 +19,7 @@ import javafx.scene.shape.Circle;
 
 /**
  *
- * @author gabri
+ * @author grupo_4
  */
 public class Circulo {
     private CircularDoublyLinkedList<Integer> elementos;

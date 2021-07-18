@@ -6,7 +6,7 @@
 
 /**
  *
- * @author gabri
+ * @author grupo_4
  */
 public class testMain {
 
