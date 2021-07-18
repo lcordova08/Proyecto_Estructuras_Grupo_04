@@ -181,4 +181,22 @@ package TDAs;
         return sb.toString();
         
     }
+    
+    public void rotateRight(){
+        E value = getFirst();
+        for(Node<E> p=last.next; p!=last;p=p.next) {
+            p.previous.data = p.data;
+        }
+        removeLast();
+        addLast(value);
+    }
+    
+    public void rotateLeft() {
+        E value = getFirst();
+        for(Node<E> p=last.next; p!=last;p=p.previous) {
+            p.previous.data = p.data;
+        }
+        removeFirst();
+        addFirst(value);
+    }
 }

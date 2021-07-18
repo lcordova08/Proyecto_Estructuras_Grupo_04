@@ -9,6 +9,7 @@ import TDAs.CircularDoublyLinkedList;
 import java.util.Random;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -24,18 +25,25 @@ import javafx.scene.shape.Circle;
 public class Circulo {
     private CircularDoublyLinkedList<Integer> elementos;
     private Pane view;
+    private Circle circulo;
+    private Pane botones;
     private static int radio;
     private static int centroX;
     private static int centroY;
+    private int cantidadElem;
 
 
     public Circulo(int radio, int centroX, int centroY, int cantidadElem) {
-        this.view = new Pane(createCircle(radio, centroX, centroY));
+        this.circulo = createCircle(radio, centroX, centroY);
+        this.view = new Pane();
+        this.view.getChildren().add(this.circulo);
         this.radio = radio;
         this.centroX = centroX;
         this.centroY = centroY;
         this.elementos = generateValues(cantidadElem);
-        addElemsView(cantidadElem, elementos);
+        this.botones = addElemsView(cantidadElem, elementos);
+        this.cantidadElem = cantidadElem;
+        view.getChildren().add(botones);
 
     }
     
@@ -58,28 +66,45 @@ public class Circulo {
         return elem;
     }
     
-    public void addElemsView(int cantidadElem, CircularDoublyLinkedList<Integer> elementos){
+    public Pane addElemsView(int cantidadElem, CircularDoublyLinkedList<Integer> elementos){
+        Pane botones = new Pane();
         for(int i = 0; i < cantidadElem; i++){
             double angulo = 2 * i * Math.PI / cantidadElem;
             double xOffset = radio * Math.cos(angulo);
             double yOffset = radio * Math.sin(angulo);
             double x = centroX + xOffset;
             double y = centroY + yOffset;
-            String value = Integer.toString(elementos.get(i));
-            Button label = new Button(value);
+            Button label = new Button(Integer.toString(elementos.get(i)));
             label.setLayoutX(x);
             label.setLayoutY(y);
-            view.getChildren().add(label);
+            botones.getChildren().add(label);
         }
-        
+        return botones;
     }
     
     public void rotateLeft() {
-        
+        botones.getChildren().clear();
+        int primero = elementos.getFirst();
+        CircularDoublyLinkedList<Integer> nueva = new CircularDoublyLinkedList<>();
+        for(int i = 1; i <=  nueva.size(); i++){
+            nueva.addLast(elementos.get(i) - 1);
+        }
+        nueva.addLast(primero - 1);
+        elementos = nueva;
+        botones.getChildren().add(addElemsView(cantidadElem, elementos));
     }
     
     public void rotateRight() {
-        
+
+        int ultimo = elementos.getLast();
+        CircularDoublyLinkedList<Integer> nueva = new CircularDoublyLinkedList<>();
+        nueva.addLast(ultimo + 1);
+        for(int i = 0; i <=  nueva.size() - 2; i++){
+            nueva.addLast(elementos.get(i) + 1);
+        }
+        elementos = nueva;
+        System.out.println(nueva);
+        botones.getChildren().add(addElemsView(cantidadElem, elementos));
     }
     
     public void deleteRow(Circulo xd){

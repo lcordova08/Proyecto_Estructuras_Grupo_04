@@ -8,9 +8,14 @@ package modelo;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -38,9 +43,35 @@ public class View extends Application {
         
         Game game = new Game(radio,centroW, centroH, 5);
         
+        Label c1 = new Label("Circulo externo");
+        Button rotateLeft = new Button("<----");
+        Button rotateRight = new Button("---->");
+        HBox girar = new HBox();
+        girar.setAlignment(Pos.CENTER);
+        girar.getChildren().addAll(c1,rotateLeft, rotateRight);
         
-        StackPane root = new StackPane();
-        root.getChildren().add(game.getRoot());
+        rotateLeft.setOnAction((e) -> {
+            game.getC1().rotateLeft();
+        });
+        rotateRight.setOnAction((e) -> {
+            game.getC1().rotateRight();
+        });
+        
+        
+        Label c2 = new Label("Circulo interno");
+        Button rotateLeftIn = new Button("<----");
+        Button rotateRightIn = new Button("---->");
+        HBox girarc2 = new HBox();
+        girarc2.setAlignment(Pos.CENTER);
+        girarc2.getChildren().addAll(c2, rotateLeftIn,rotateRightIn);
+        
+        
+        VBox botones = new VBox();
+        botones.getChildren().addAll(girar, girarc2);
+        
+        BorderPane root = new BorderPane();
+        root.setCenter(game.getRoot());
+        root.setTop(botones);
         
         Scene scene = new Scene(root, width, heigth);
         
